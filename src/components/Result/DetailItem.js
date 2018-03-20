@@ -71,6 +71,14 @@ const UnorderedList = ({ value }) => {
 };
 UnorderedList.propTypes = { value: PropTypes.array };
 
+const ResultTable = ({ value }) => {
+  const items = compact(map(value, (value, key) => (
+    <Row label={key.replace('y', '')}>{value}</Row>
+  )));
+
+  return <table><tbody>{items}</tbody></table>;
+}
+
 const Row = ({ label, children }) => {
   if (!isValidChildren(children)) return null;
 
@@ -90,4 +98,5 @@ export {
   ListItem,
   Row,
   UnorderedList,
+  ResultTable
 };

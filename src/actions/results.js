@@ -48,17 +48,17 @@ function shouldFetchResults(state) {
 function processParams(params) {
   const new_params = { };
   if(params.trade_flow === 'Importing'){
-    new_params.partner_names = params.countries;
-    new_params.reporter_names = 'United States'
+    new_params.partner_agreement_names = params.countries;
+    new_params.reporter_agreement_names = 'United States'
   }
   else{
-    new_params.reporter_names = params.countries;
-    new_params.partner_names = 'United States'
+    new_params.reporter_agreement_names = params.countries;
+    new_params.partner_agreement_names = 'United States'
   }
   if (params.offset)
     new_params.offset = params.offset;
 
-  return stringify(params);
+  return stringify(new_params);
 }
 
 export function fetchResultsIfNeeded(params) {
