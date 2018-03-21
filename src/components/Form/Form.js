@@ -21,11 +21,7 @@ TextField.propTypes = {
   meta: PropTypes.object,
 };
 
-const onSelectFn = (onChange) => ({
-  false: (value) => onChange(value['value']),
-  true:  (values) => onChange(map(values, 'value')),
-});
-const SelectField = ({ description, input, label = 'Untitled', name, options, multi = false }) => (
+const SelectField = ({ description, input, label = 'Untitled', name, options, multi = false, meta: { error } }) => (
   <div className="explorer__form__group">
     <label htmlFor={name}>{label}</label>
     {description ? <p>{description}</p> : null}
@@ -34,10 +30,12 @@ const SelectField = ({ description, input, label = 'Untitled', name, options, mu
         {...input}
         options={options}
         multi={multi} autoBlur
+        simpleValue = {true}
         onBlur={() => input.onBlur(input.value)}
-        onChange={onSelectFn(input.onChange)[multi]}
+        onChange={(value) => input.onChange(value)}
       />
     </div>
+    {(error && <span className="explorer__form__error">{error}</span>)}
   </div>
 );
 SelectField.propTypes = {
@@ -64,7 +62,7 @@ const Form = ({
       />
       <Field
         component={TextField} name="hsCode" label="HS Code"
-        description="Search by HS Code or prefix.  This field is not requried."
+        description="Search by HS Code.  This field is not requried.  The entered value must match exactly."
       />
       <div className="explorer__form__group">
         <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit} disabled={!!error}>
@@ -78,16 +76,6 @@ Form.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
-function validate(values) {
-  const errors = {};
-  //if (values.fuzzyName === 'true' && isEmpty(trim(values.name))) {
-  //  errors.name = 'Name is required.';
-  //  errors._error = true;
-  //}
-  return errors;
-}
-
 export default reduxForm({
   form: 'form',
-  validate,
 })(Form);

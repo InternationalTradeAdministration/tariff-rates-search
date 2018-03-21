@@ -46,7 +46,7 @@ function shouldFetchResults(state) {
 }
 
 function processParams(params) {
-  const new_params = { };
+  const new_params = { sort: 'tariff_line:asc'};
   if(params.trade_flow === 'Importing'){
     new_params.partner_agreement_names = params.countries;
     new_params.reporter_agreement_names = 'United States'
@@ -55,6 +55,8 @@ function processParams(params) {
     new_params.reporter_agreement_names = params.countries;
     new_params.partner_agreement_names = 'United States'
   }
+  if (params.hs_code)
+    new_params.tariff_line = params.hs_code;
   if (params.offset)
     new_params.offset = params.offset;
 

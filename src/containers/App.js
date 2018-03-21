@@ -5,6 +5,7 @@ import { assign, camelCase, isEmpty, omitBy, reduce, snakeCase } from '../utils/
 import { Form, Result, Spinner } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions } from '../actions';
 import './App.scss';
+import { SubmissionError } from 'redux-form';
 
 class App extends Component {
   componentDidMount() {
@@ -23,6 +24,14 @@ class App extends Component {
     this.push(params);
   }
   handleSubmit = (form) => {
+    const error = {};
+    if(!form.tradeFlow)
+      error.tradeFlow = 'This field is required.';
+    if(!form.countries)
+      error.countries = 'This field is required.';
+    if(!isEmpty(error))
+      throw new SubmissionError(error);
+
     const params = reduce(omitBy(form, isEmpty), (result, value, _key) => {
       const key = snakeCase(_key);
       return assign(

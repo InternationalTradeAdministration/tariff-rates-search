@@ -76,7 +76,7 @@ const ResultTable = ({ value }) => {
     <Row label={key.replace('y', '')}>{value}</Row>
   )));
 
-  return <table><tbody>{items}</tbody></table>;
+  return <table className="explorer__result-item__identifications"><tbody>{items}</tbody></table>;
 }
 
 const Row = ({ label, children }) => {
