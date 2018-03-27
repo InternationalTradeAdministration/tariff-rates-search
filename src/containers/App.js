@@ -6,6 +6,7 @@ import { Form, Result, Spinner } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions } from '../actions';
 import './App.scss';
 import { SubmissionError } from 'redux-form';
+import { MexicoResult, CanadaResult } from '../components/Result/StaticResult';
 
 class App extends Component {
   componentDidMount() {
@@ -13,6 +14,7 @@ class App extends Component {
     dispatch(requestFormOptions());
     dispatch(fetchResultsIfNeeded(query));
   }
+
   handlePaging = (e) => {
     e.preventDefault();
     if (!e.target.dataset.page) return;
@@ -23,6 +25,7 @@ class App extends Component {
     dispatch(fetchResultsIfNeeded(params));
     this.push(params);
   }
+
   handleSubmit = (form) => {
     const error = {};
     if(!form.tradeFlow)
@@ -40,15 +43,22 @@ class App extends Component {
     this.props.dispatch(fetchResultsIfNeeded(params));
     this.push(params);
   }
+
   push(params) {
     this.props.history.push(`?${stringify(params)}`);
   }
+
   render() {
     const { query, results, form_options } = this.props;
     const formValues = reduce(
       query,
       (result, value, key) => assign(result, { [camelCase(key)]: value }),
       {});
+    let result = <Result results={results} onPaging={this.handlePaging} query={query} />;
+    if (query.countries === 'Mexico')
+      result = <MexicoResult />;
+    else if (query.countries === 'Canada')
+      result = <CanadaResult />;
     return (
       <div className="explorer">
         <h1 className="Header-1"><b>Search International Tariff Rates Data</b></h1>
@@ -57,7 +67,7 @@ class App extends Component {
         <div className="explorer__content">
           <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} />
           <Spinner active={results.isFetching} />
-          <Result results={results} onPaging={this.handlePaging} query={query} />
+          {result}
         </div>
       </div>
     );

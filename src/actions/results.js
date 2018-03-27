@@ -35,11 +35,11 @@ function fetchResults(querystring) {
   };
 }
 
-function shouldFetchResults(state) {
+function shouldFetchResults(state, params) {
   const { results } = state;
   if (!results) {
     return true;
-  } else if (results.isFetching) {
+  } else if (results.isFetching || isEmpty(params) || params.countries === 'Canada' || params.countries === 'Mexico'){
     return false;
   }
   return true;
@@ -65,7 +65,7 @@ function processParams(params) {
 
 export function fetchResultsIfNeeded(params) {
   return (dispatch, getState) => {
-    if (shouldFetchResults(getState()) && !isEmpty(params)) {
+    if (shouldFetchResults(getState(), params)) {
       return dispatch(fetchResults(processParams(params)));
     }
     return Promise.resolve([]);

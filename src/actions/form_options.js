@@ -15,6 +15,9 @@ export function requestOptions() {
 
 export function setFormOptions(json){
   const countries = extractOptions(json.aggregations.partners);
+  countries.push({label: 'Canada', value: 'Canada'});
+  countries.push({label: 'Mexico', value: 'Mexico'});
+  countries.sort(propComparator('value', 'asc'));
   const return_action = {  
     type: SET_FORM_OPTIONS,
     countries: countries,
@@ -41,7 +44,7 @@ function fetchResults(){
 function extractOptions(aggregations){
   let options = map(aggregations, obj => { 
     return {label: obj['key'], value: obj['key']};
-  }).sort(propComparator('value', 'asc'));
+  });
 
   return options;
 }
