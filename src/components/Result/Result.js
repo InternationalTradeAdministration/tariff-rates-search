@@ -5,11 +5,16 @@ import Pages from './Pages';
 import './Result.scss';
 
 const Label = ({ count, query }) => {
-  let text = 'Complete Tariff Results';
+  let text = "";
+  if(query.trade_flow === 'Importing'){
+    text = "U.S. Imports from " + query.countries + " - ";
+  } else {
+    text = "U.S. Exports to " + query.countries + " - ";
+  }
   if (!isEmpty(omit(query, 'offset'))) {
-    if (count === 0) text = 'No result.';
-    else if (count === 1) text = `${count} result.`;
-    else text = `${count} results.`;
+    if (count === 0) text += 'No results.';
+    else if (count === 1) text += `${count} result`;
+    else text += `${count} results`;
   }
   return <p className="explorer__result__label">{text}</p>;
 };
