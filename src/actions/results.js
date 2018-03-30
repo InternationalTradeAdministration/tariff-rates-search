@@ -55,12 +55,19 @@ function processParams(params) {
     new_params.reporter_agreement_names = params.countries;
     new_params.partner_agreement_names = 'United States'
   }
-  if (params.hs_code)
-    new_params.tariff_line = params.hs_code;
   if (params.offset)
     new_params.offset = params.offset;
-
+  processHSCode(new_params, params.hs_code);
+ 
   return stringify(new_params);
+}
+
+function processHSCode(params, hs_code){
+  let hs_field = "tariff_line";
+  const length = hs_code.length;
+  if (length < 10)
+    hs_field = "hs_prefix_" + length;
+  params[hs_field] = hs_code;
 }
 
 export function fetchResultsIfNeeded(params) {
