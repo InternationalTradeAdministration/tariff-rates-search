@@ -47,6 +47,16 @@ SelectField.propTypes = {
   multi: PropTypes.bool,
 };
 
+const RadioGroup = ({input, meta, options}) => {
+  const hasError = meta.touched && meta.error;
+  return(
+    <div>
+      {options.map(o => <p key={o.value}><input type="radio" {...input} value={o.value} checked={o.value === input.value} /> {o.title}</p>)}
+      {hasError && <span className="explorer__form__error">{meta.error}</span>}
+    </div>
+  );
+}
+
 const Form = ({
   error, handleSubmit, formOptions
 }) => (
@@ -56,12 +66,10 @@ const Form = ({
       <div className="explorer__form__group">
         <label>Importing or Exporting</label>
           <div className="explorer__form__radio">
-            <p><Field name="tradeFlow" component="input" type="radio" value="Importing"/>
-              You are importing goods from an FTA Partner into the United States.
-             </p>
-            <p><Field name="tradeFlow" component="input" type="radio" value="Exporting"/>
-             You are exporting goods from the United States to an FTA partner.
-             </p>
+             <Field component={RadioGroup} name="tradeFlow" options={[
+              { title: 'You are importing goods from an FTA Partner into the United States.', value: 'Importing'},
+              { title: 'You are exporting goods from the United States to an FTA partner.', value: 'Exporting'}
+             ]} />
           </div>
       </div>
 
@@ -71,8 +79,11 @@ const Form = ({
       />
       <Field
         component={TextField} name="hsCode" label="HS Code"
-        description="Search by HS Code.  This field is not requried."
+        description="Search by HS Code (or prefix) by entering 1-10 characters.  This field is not requried."
       />
+      <p>
+      If you do not know your HS code, the <a href="http://uscensus.prod.3ceonline.com/" target="_blank">U.S. Census Bureau’s Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, click <a href="https://2016.export.gov/FTA/ftatarifftool/Help.aspx" target="_blank">here</a> for more information.
+      </p>
       <div className="explorer__form__group">
         <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit} disabled={!!error}>
           <i className="fa fa-paper-plane" /> Search

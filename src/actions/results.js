@@ -57,7 +57,8 @@ function processParams(params) {
   }
   if (params.offset)
     new_params.offset = params.offset;
-  processHSCode(new_params, params.hs_code);
+  if (params.hs_code)
+    processHSCode(new_params, params.hs_code);
  
   return stringify(new_params);
 }
