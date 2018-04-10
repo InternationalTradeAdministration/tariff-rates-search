@@ -57,41 +57,58 @@ const RadioGroup = ({input, meta, options}) => {
   );
 }
 
-const Form = ({
-  error, handleSubmit, formOptions
-}) => (
-  <form className="explorer__form" onSubmit={handleSubmit}>
-    <fieldset>
+class Form extends React.Component {
+  constructor(props){
+    super(props);
+    this.clearForm = this.clearForm.bind(this);
+  }
 
-      <div className="explorer__form__group">
-        <label>Importing or Exporting</label>
-          <div className="explorer__form__radio">
-             <Field component={RadioGroup} name="tradeFlow" options={[
-              { title: 'You are importing goods from an FTA Partner into the United States.', value: 'Importing'},
-              { title: 'You are exporting goods from the United States to an FTA partner.', value: 'Exporting'}
-             ]} />
+  clearForm() {
+    this.props.change('tradeFlow', null);
+    this.props.change('countries', null);
+    this.props.change('hsCode', null);
+  }
+
+  render() {
+    const { error, handleSubmit, formOptions } = this.props;
+    return (
+      <form className="explorer__form" onSubmit={handleSubmit}>
+        <fieldset>
+
+          <div className="explorer__form__group">
+            <label>1.  Are you Importing or Exporting?</label>
+              <div className="explorer__form__radio">
+                 <Field component={RadioGroup} name="tradeFlow" options={[
+                  { title: 'You are exporting goods from the United States to an FTA partner.', value: 'Exporting'},
+                  { title: 'You are importing goods from an FTA Partner into the United States.', value: 'Importing'}
+                 ]} />
+              </div>
           </div>
-      </div>
 
-      <Field
-        component={SelectField} name="countries" label="FTA Partner Countries" options={formOptions.countries}
-        description="Select an FTA Partner Country."
-      />
-      <Field
-        component={TextField} name="hsCode" label="HS Code"
-        description="Search by HS Code (or prefix) by entering 1-10 characters.  This field is not requried."
-      />
-      <p>
-      If you do not know your HS code, the <a href="http://uscensus.prod.3ceonline.com/" target="_blank">U.S. Census Bureau’s Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, click <a href="https://2016.export.gov/FTA/ftatarifftool/Help.aspx" target="_blank">here</a> for more information.
-      </p>
-      <div className="explorer__form__group">
-        <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit} disabled={!!error}>
-          <i className="fa fa-paper-plane" /> Search
-        </button>
-      </div>
-    </fieldset>
-  </form>
-);
+          <Field
+            component={SelectField} name="countries" label="2. Please select an FTA Partner:" options={formOptions.countries}
+            description=""
+          />
+          <Field
+            component={TextField} name="hsCode" label="3. Search by an HS Code:"
+            description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product).  This field is not requried."
+          />
+          <p>
+          If you do not know your HS code, the <a href="http://uscensus.prod.3ceonline.com/" target="_blank">U.S. Census Bureau’s Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, click <a href="https://2016.export.gov/FTA/ftatarifftool/Help.aspx" target="_blank">here</a> for more information.
+          </p>
+          <div className="explorer__form__group">
+            <button className="explorer__form__clear pure-button" onClick={this.clearForm} disabled={!!error}>
+              Clear
+            </button>
+            <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit} disabled={!!error}>
+              <i className="fa fa-paper-plane" /> Search
+            </button>
+          </div>
+        </fieldset>
+      </form>
+    );
+  }
+}
 Form.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };

@@ -42,6 +42,8 @@ class App extends Component {
     }, {});
     this.props.dispatch(fetchResultsIfNeeded(params));
     this.push(params);
+    const {x, y} = this.props.scroll_coordinates;
+    window.scrollTo(x, y); 
   }
 
   push(params) {
