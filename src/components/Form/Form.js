@@ -97,10 +97,10 @@ class Form extends React.Component {
           If you do not know your HS code, the <a href="http://uscensus.prod.3ceonline.com/" target="_blank">U.S. Census Bureau’s Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, click <a href="https://2016.export.gov/FTA/ftatarifftool/Help.aspx" target="_blank">here</a> for more information.
           </p>
           <div className="explorer__form__group">
-            <button className="explorer__form__clear pure-button" onClick={this.clearForm} disabled={!!error}>
+            <button className="explorer__form__clear pure-button" type="reset" onClick={this.clearForm} >
               Clear
             </button>
-            <button className="explorer__form__submit pure-button pure-button-primary" onClick={handleSubmit} disabled={!!error}>
+            <button className="explorer__form__submit pure-button pure-button-primary" type="submit" onClick={handleSubmit} disabled={!!error}>
               <i className="fa fa-paper-plane" /> Search
             </button>
           </div>
