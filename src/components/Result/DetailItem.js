@@ -72,8 +72,9 @@ const UnorderedList = ({ value }) => {
 UnorderedList.propTypes = { value: PropTypes.array };
 
 const ResultTable = ({ value }) => {
-  const items = compact(map(value, (value, key) => (
-    <Row label={key.replace('y', '')}>{value}</Row>
+  const orderedItems = map(value, (v, k) => [k, v]).sort();
+  const items = compact(map(orderedItems, arr => (
+    <Row label={arr[0].replace('y', '')}>{arr[1]}</Row>
   )));
 
   return <table className="explorer__result-item__identifications"><tbody>{items}</tbody></table>;
