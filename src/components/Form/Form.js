@@ -91,7 +91,7 @@ class Form extends React.Component {
           />
           <Field
             component={TextField} name="hsCode" label="3. Search by an HS Code:"
-            description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product).  This field is not requried."
+            description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product).  This field is not required."
           />
           <p>
           If you do not know your HS code, the <a href="http://uscensus.prod.3ceonline.com/" target="_blank">U.S. Census Bureau’s Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, click <a href="https://2016.export.gov/FTA/ftatarifftool/Help.aspx" target="_blank">here</a> for more information.
