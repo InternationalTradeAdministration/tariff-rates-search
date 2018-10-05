@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
-import { REQUEST_RESULTS, RECEIVE_RESULTS, RECEIVE_FAILURE } from 'constants';
+import { REQUEST_RESULTS, RECEIVE_RESULTS, RECEIVE_FAILURE } from '../constants';
 import config from '../config.js';
 import { isEmpty } from '../utils/lodash';
 
@@ -59,7 +59,7 @@ function processParams(params) {
     new_params.offset = params.offset;
   if (params.hs_code)
     processHSCode(new_params, params.hs_code);
- 
+
   return stringify(new_params);
 }
 

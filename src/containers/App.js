@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { stringify } from 'querystring';
 import { assign, camelCase, isEmpty, omitBy, reduce, snakeCase } from '../utils/lodash';
+import '../scss/explorer_app.scss';
 import { Form, Result, Spinner } from '../components';
 import { fetchResultsIfNeeded, requestFormOptions } from '../actions';
 import './App.scss';
@@ -63,14 +64,11 @@ class App extends Component {
       result = <CanadaResult />;
     return (
       <div className="explorer">
-        <h1 className="Header-1"><b>Search International Tariff Rates Data</b></h1>
-        <p className="DefaultParagraph-1"></p>
-
-        <div className="explorer__content">
+        <div className="explorer__form-wrapper">
           <Form onSubmit={this.handleSubmit} initialValues={formValues} formOptions={form_options} />
           <Spinner active={results.isFetching} />
-          {result}
         </div>
+        {result}
       </div>
     );
   }

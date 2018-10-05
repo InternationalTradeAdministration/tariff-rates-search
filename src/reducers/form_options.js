@@ -1,4 +1,3 @@
-import 'babel-polyfill';
 import { SET_FORM_OPTIONS, REQUEST_FORM_OPTIONS } from '../constants';
 
 export default (state = {

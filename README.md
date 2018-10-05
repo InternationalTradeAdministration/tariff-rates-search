@@ -8,7 +8,7 @@ A search client for international tariff rates data.
 ```
 npm install
 npm start
-open http://localhost:3001
+open http://localhost:8080
 ```
 
 ### Linting
@@ -22,7 +22,7 @@ npm run lint
 ### Build & Deploy to GitHub Page
 
 ```
-npm run clean && npm run build && npm run deploy
+npm run build && npm run deploy
 ```
 
 ### Use as a plugin.
@@ -33,7 +33,7 @@ Include the build output (e.g. `bundle.js` and `explorer.css`) within the `head`
   <head>
     ...
     <script src="bundle.js"></script> <!-- Tariff Rates Search js -->
-    <link href="explorer.css"></script> <!-- Tariff Rates Search styles -->
+    <link href="explorer.css" /> <!-- Tariff Rates Search styles -->
     ...
   </head>
   <body>
@@ -47,11 +47,3 @@ Include the build output (e.g. `bundle.js` and `explorer.css`) within the `head`
   </body>
 </html>
 ```
-
-### Dependencies
-
-* React
-* Webpack
-* [webpack-dev-server](https://github.com/webpack/webpack-dev-server)
-* [babel-loader](https://github.com/babel/babel-loader)
-* [react-hot-loader](https://github.com/gaearon/react-hot-loader)

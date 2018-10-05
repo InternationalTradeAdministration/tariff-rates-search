@@ -1,25 +1,15 @@
 .explorer {
-  font: 16px/1.5 Lato,"Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: normal;
   margin: 0 auto;
   position: relative;
   text-align: left;
-  max-width: 971px;
 
-  &__content {
-    font-family: Verdana;
-    margin: 0 58.5px;
-    max-width: 800px;
-    padding: 0 22px;
+  .Header-1 {
+    margin: 0;
   }
 
   &__header__banner {
     height: 102px;
-  }
-
-  &__result {
-    clear: both;
-    font-size: 11px;
   }
 
   &__result-item {

@@ -1,0 +1,40 @@
+// Vendor -------------- //
+@import '~uswds/src/stylesheets/lib/bourbon';
+//@import '~uswds/src/stylesheets/lib/neat';
+//@import '~uswds/src/stylesheets/lib/normalize';
+
+// Core -------------- //
+//@import '~uswds/src/stylesheets/core/variables';
+@import 'uswds_variables';
+//@import '~uswds/src/stylesheets/core/fonts';
+//@import '~uswds/src/stylesheets/core/base';
+//@import '~uswds/src/stylesheets/core/grid';
+@import '~uswds/src/stylesheets/core/utilities';
+
+// Elements -------------- //
+// Styles basic HTML elements
+@import '~uswds/src/stylesheets/elements/buttons';
+//@import '~uswds/src/stylesheets/elements/embed';
+//@import '~uswds/src/stylesheets/elements/figure';
+//@import '~uswds/src/stylesheets/elements/inputs';
+//@import '~uswds/src/stylesheets/elements/labels';
+//@import '~uswds/src/stylesheets/elements/list';
+//@import '~uswds/src/stylesheets/elements/table';
+//@import '~uswds/src/stylesheets/elements/typography';
+
+// Components -------------- //
+//@import '~uswds/src/stylesheets/components/accordions';
+//@import '~uswds/src/stylesheets/components/alerts';
+//@import '~uswds/src/stylesheets/components/banner';
+//@import '~uswds/src/stylesheets/components/footer';
+//@import '~uswds/src/stylesheets/components/forms';
+//@import '~uswds/src/stylesheets/components/graphic-list';
+//@import '~uswds/src/stylesheets/components/header';
+//@import '~uswds/src/stylesheets/components/hero';
+//@import '~uswds/src/stylesheets/components/layout';
+//@import '~uswds/src/stylesheets/components/media-block';
+//@import '~uswds/src/stylesheets/components/navigation';
+//@import '~uswds/src/stylesheets/components/search';
+@import '~uswds/src/stylesheets/components/section';
+//@import '~uswds/src/stylesheets/components/sidenav';
+//@import '~uswds/src/stylesheets/components/skipnav';

@@ -29,7 +29,6 @@ const SelectField = ({ description, input, label = 'Untitled', name, options, mu
       <Select
         {...input}
         options={options}
-        multi={multi} autoBlur
         simpleValue = {true}
         onBlur={() => input.onBlur(input.value)}
         onChange={(value) => input.onChange(value)}
@@ -51,7 +50,7 @@ const RadioGroup = ({input, meta, options}) => {
   const hasError = meta.touched && meta.error;
   return(
     <div>
-      {options.map(o => <p key={o.value}><input type="radio" {...input} value={o.value} checked={o.value === input.value} /> {o.title}</p>)}
+      {options.map(o => <p key={o.value}><input id={o.value} type="radio" {...input} value={o.value} checked={o.value === input.value} /><label htmlFor={o.value}>{o.title}</label></p>)}
       {hasError && <span className="explorer__form__error">{meta.error}</span>}
     </div>
   );
@@ -73,17 +72,16 @@ class Form extends React.Component {
     const { error, handleSubmit, formOptions } = this.props;
     return (
       <form className="explorer__form" onSubmit={handleSubmit}>
-        <fieldset>
-
-          <div className="explorer__form__group">
+        <h1 className="Header-1"><b>Search FTA Rates</b></h1>
+          <fieldset className="explorer__form__group">
             <label>1.  Are you Importing or Exporting?</label>
               <div className="explorer__form__radio">
                  <Field component={RadioGroup} name="tradeFlow" options={[
-                  { title: 'You are exporting goods from the United States to an FTA partner.', value: 'Exporting'},
-                  { title: 'You are importing goods from an FTA Partner into the United States.', value: 'Importing'}
+                   { title: <span>You are <u>exporting</u> goods from the United States to an FTA partner.</span>, value: 'Exporting'},
+                   { title: <span>You are <u>importing</u> goods from an FTA Partner into the United States.</span>, value: 'Importing'}
                  ]} />
               </div>
-          </div>
+          </fieldset>
 
           <Field
             component={SelectField} name="countries" label="2. Please select an FTA Partner:" options={formOptions.countries}
@@ -94,17 +92,16 @@ class Form extends React.Component {
             description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product).  This field is not required."
           />
           <p>
-          If you do not know your HS code, the <a href="http://uscensus.prod.3ceonline.com/" target="_blank">U.S. Census Bureau’s Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, click <a href="https://2016.export.gov/FTA/ftatarifftool/Help.aspx" target="_blank">here</a> for more information.
+          If you do not know your HS code, the <a href="https://uscensus.prod.3ceonline.com/" target="_blank">Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, please see <a href="./FAQs" target="_blank">FAQ page</a> for more information.
           </p>
           <div className="explorer__form__group">
-            <button className="explorer__form__clear pure-button" type="reset" onClick={this.clearForm} >
-              Clear
-            </button>
             <button className="explorer__form__submit pure-button pure-button-primary" type="submit" onClick={handleSubmit} disabled={!!error}>
               <i className="fa fa-paper-plane" /> Search
             </button>
+            <button className="explorer__form__clear pure-button" type="reset" onClick={this.clearForm} >
+              Clear
+            </button>
           </div>
-        </fieldset>
       </form>
     );
   }

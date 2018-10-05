@@ -1,0 +1,25 @@
+#explorer-app {
+  @import '../scss/uswds';
+
+  .explorer__form-wrapper {
+    @extend .usa-section-dark;
+    padding-bottom: 1rem;
+  }
+
+  .explorer__form__clear {
+    @extend .usa-button-big;
+    @extend .usa-button-gray;
+  }
+
+  .explorer__form__submit {
+    @extend .usa-button-big;
+  }
+
+  .explorer__result-item-table thead th {
+    @extend .usa-section-dark;
+  }
+
+  label {
+    color: $color-white;
+  }
+}
