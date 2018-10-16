@@ -27,10 +27,13 @@ const MoreInformation = () => {
 		<div>
 			<p>For more information on NAFTA:</p>
 			<ul>
-				<li><a target="_blank" href="http://www.nafta-sec-alena.org/en/view.aspx">The NAFTA Secretariat</a></li>
+				<li><a target="_blank" href="https://www.nafta-sec-alena.org/Home/About-the-NAFTA-Secretariat">The NAFTA Secretariat</a></li>
 				<li><a target="_blank" href="http://tcc.export.gov/Trade_Agreements/Exporters_Guides/List_All_Guides/NAFTA_guides.asp">The Trade Compliance Center - NAFTA Guides</a></li>
 				<li><a target="_blank" href="http://www.ustr.gov/trade-agreements/free-trade-agreements/north-american-free-trade-agreement-nafta">The Office of the U.S. Trade Representative</a></li>
 			</ul>
+			<p>
+				<a href="https://ustr.gov/trade-agreements/free-trade-agreements/united-states-mexico-canada-agreement">United States-Mexico-Canada Agreement</a> rates coming soon.
+			</p>
 		</div>
 	);
 }

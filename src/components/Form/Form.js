@@ -21,13 +21,14 @@ TextField.propTypes = {
   meta: PropTypes.object,
 };
 
-const SelectField = ({ description, input, label = 'Untitled', name, options, multi = false, meta: { error } }) => (
+const SelectField = ({ description, input, label = 'Untitled', options, multi = false, meta: { error } }) => (
   <div className="explorer__form__group">
-    <label htmlFor={name}>{label}</label>
-    {description ? <p>{description}</p> : null}
     <div>
+      <label htmlFor={input.name}>{label}</label>
+      {description ? <p>{description}</p> : null}
       <Select
         {...input}
+        id={input.name}
         options={options}
         simpleValue = {true}
         onBlur={() => input.onBlur(input.value)}
@@ -41,7 +42,6 @@ SelectField.propTypes = {
   description: PropTypes.string,
   input: PropTypes.object.isRequired,
   label: PropTypes.string,
-  name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   multi: PropTypes.bool,
 };
@@ -74,13 +74,13 @@ class Form extends React.Component {
       <form className="explorer__form" onSubmit={handleSubmit}>
         <h1 className="Header-1"><b>Search FTA Rates</b></h1>
           <fieldset className="explorer__form__group">
-            <label>1.  Are you Importing or Exporting?</label>
-              <div className="explorer__form__radio">
-                 <Field component={RadioGroup} name="tradeFlow" options={[
-                   { title: <span>You are <u>exporting</u> goods from the United States to an FTA partner.</span>, value: 'Exporting'},
-                   { title: <span>You are <u>importing</u> goods from an FTA Partner into the United States.</span>, value: 'Importing'}
-                 ]} />
-              </div>
+            <legend>1.  Are you Importing or Exporting?</legend>
+            <div className="explorer__form__radio">
+               <Field component={RadioGroup} name="tradeFlow" options={[
+                 { title: <span>You are <u>exporting</u> goods from the United States to an FTA partner.</span>, value: 'Exporting'},
+                 { title: <span>You are <u>importing</u> goods from an FTA Partner into the United States.</span>, value: 'Importing'}
+               ]} />
+            </div>
           </fieldset>
 
           <Field
@@ -89,7 +89,7 @@ class Form extends React.Component {
           />
           <Field
             component={TextField} name="hsCode" label="3. Search by an HS Code:"
-            description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product).  This field is not required."
+            description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product)."
           />
           <p>
           If you do not know your HS code, the <a href="https://uscensus.prod.3ceonline.com/" target="_blank">Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, please see <a href="./FAQs" target="_blank">FAQ page</a> for more information.

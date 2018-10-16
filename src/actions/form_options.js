@@ -1,3 +1,4 @@
+require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
 import { isEmpty, omit, values, has, map, startCase, compact } from '../utils/lodash';
@@ -18,7 +19,7 @@ export function setFormOptions(json){
   countries.push({label: 'Canada', value: 'Canada'});
   countries.push({label: 'Mexico', value: 'Mexico'});
   countries.sort(propComparator('value', 'asc'));
-  const return_action = {  
+  const return_action = {
     type: SET_FORM_OPTIONS,
     countries: countries,
   };
@@ -42,7 +43,7 @@ function fetchResults(){
 }
 
 function extractOptions(aggregations){
-  let options = map(aggregations, obj => { 
+  let options = map(aggregations, obj => {
     return {label: obj['key'], value: obj['key']};
   });
 

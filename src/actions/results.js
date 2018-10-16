@@ -1,3 +1,4 @@
+require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch';
 import { stringify } from 'querystring';
 import { REQUEST_RESULTS, RECEIVE_RESULTS, RECEIVE_FAILURE } from '../constants';

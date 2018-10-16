@@ -20,9 +20,9 @@ class Item extends Component {
   }
 
   render() {
-    const { tariff_line, subheading_description, quota_name } = this.props.result;
+    const { tariff_line, tariff_line_description, quota_name } = this.props.result;
     const { expand } = this.state;
-    const itemTitle = tariff_line + " - " + subheading_description;
+    const itemTitle = tariff_line + " - " + tariff_line_description;
     const trq = quota_name ? " - " + quota_name : null
 
     return (

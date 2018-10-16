@@ -46,7 +46,7 @@
       vertical-align: top;
 
       &.explorer__result-field-name {
-        min-width: 15rem;
+        min-width: 23rem;
       }
     }
 
@@ -65,8 +65,11 @@
     min-width: auto;
     vertical-align: top;
     width: auto;
-    tbody {
+
+    th {
+      border: 0;
     }
+
     td {
       min-width: 8rem;
       padding: 0.5rem;

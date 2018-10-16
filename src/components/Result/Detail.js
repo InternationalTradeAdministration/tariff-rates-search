@@ -6,7 +6,9 @@ const Detail = ({ result }) => (
     <tbody>
       <Row label="HS Code">{result.tariff_line}</Row>
 
-      <Row label="Description">{result.subheading_description}</Row>
+      <Row label="Tariff Line Description">{result.tariff_line_description}</Row>
+
+      <Row label="Subheading Description">{result.subheading_description}</Row>
 
       <Row label="Staging Basket">{result.staging_basket}</Row>
 
