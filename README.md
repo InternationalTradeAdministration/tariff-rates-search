@@ -4,6 +4,7 @@ Tariff Rates Search
 A search client for international tariff rates data.
 
 ### Setup
+Requires Node.js 10.x
 
 ```
 npm install
