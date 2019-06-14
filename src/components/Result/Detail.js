@@ -27,6 +27,8 @@ const Detail = ({ result }) => (
       <Row label="Rule of Origin">
         {result.rule_text && <span>{result.rule_text}</span>}
         {result.link_text && result.link_url && <p><a href={result.link_url}>{result.link_text}</a></p>}
+        {result.link_text2 && result.link_url2 && <p><a href={result.link_url2}>{result.link_text2}</a></p>}
+        {result.link_text3 && result.link_url3 && <p><a href={result.link_url3}>{result.link_text3}</a></p>}
       </Row>
     </tbody>
   </table>
