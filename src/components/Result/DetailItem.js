@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import Fragment from 'react-dot-fragment';
 import { compact, get, isEmpty, map } from '../../utils/lodash';
 
 const isValidChildren = (value) => {
@@ -19,15 +20,40 @@ const truncateDecimalPlace = (value) => {
   return !isEmpty(found) ? found[0] : value;
 };
 
-const ResultTable = ({ headers, entries }) => {
+const ResultTable = ({ headers, entries, reporter_name, partner_name, tariff_line }) => {
   if (isEmpty(entries)) return null;
   const headerCells = headers.map(header => <th key={header}>{header}</th>);
-  const orderedItems = map(entries, (v, k) => [k, v]).sort();
+  let orderedItems = map(entries, (v, k) => [k, v]).sort();
+
+  if (((reporter_name === "Korea") || (partner_name === "Korea")) && ConsolidatedLines.includes(tariff_line)) {
+    orderedItems = orderedItems.slice((orderedItems.filter(item => item.includes("y2020"))), -22); // because we want to chop the next 22 years
+  };
+  // console.log(orderedItems);
+
   const items = compact(map(orderedItems, arr => (
     <Row key={arr[0]} label={arr[0].replace('y', '')}>{truncateDecimalPlace(arr[1])}</Row>
   )));
 
-  return <table className="explorer__result-item-table"><thead><tr>{headerCells}</tr></thead><tbody>{items}</tbody></table>;
+  return (
+    <table className="explorer__result-item-table">
+      <thead><tr>{headerCells}</tr></thead>
+      <tbody>
+        {items}
+        { (((reporter_name === "Korea") || (partner_name === "Korea")) && ConsolidatedLines.includes(tariff_line)) ? (
+          <Fragment>
+              <tr>
+                <td className="explorer__result-field-name">2020 - 2040</td>
+                <td className="explorer__result-field-value">{truncateDecimalPlace(entries["y2020"])}</td>
+              </tr>
+              <tr>
+                <td className="explorer__result-field-name">2041</td>
+                <td className="explorer__result-field-value">{truncateDecimalPlace(entries["y2041"])}</td>
+              </tr>
+          </Fragment>
+        ) : null }
+      </tbody>
+    </table>
+  );
 }
 
 const Row = ({ label, children }) => {
@@ -46,3 +72,12 @@ export {
   Row,
   ResultTable
 };
+
+const ConsolidatedLines = [
+  "87042100",
+  "87042250",
+  "87042300",
+  "87043100",
+  "87043200",
+  "87049000",
+];
