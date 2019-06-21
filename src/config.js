@@ -7,7 +7,7 @@ const config = assign({
         //host: 'https://api.govwizely.com/tariff_rates/search',
         //apiKey: 'Z48wSr3E3nNN4itDUvE4Clje',
         host: 'https://api.trade.gov/tariff_rates/search',
-        apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC',
+        apiKey: 'qlvetA6ZaeBY2ULNTI9ADlrE',
       },
     },
   },
@@ -15,7 +15,7 @@ const config = assign({
     api: {
       tariff_rates: {
         host: 'https://api.trade.gov/tariff_rates/search',
-        apiKey: 'hQ4L7ylI9POH3QuqxOY_l2UC',
+        apiKey: 'qlvetA6ZaeBY2ULNTI9ADlrE',
       },
     },
   },
