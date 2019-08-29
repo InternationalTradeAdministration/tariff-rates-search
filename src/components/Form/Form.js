@@ -2,15 +2,13 @@ import cx from 'classnames';
 import React, { PropTypes } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import Select from 'react-select';
-import { isEmpty, map, trim } from '../../utils/lodash';
-import tradeFlows from '../../fixtures/trade_flows';
 import './Form.scss';
 
 const TextField = ({ description, input, label, meta: { error } }) => (
   <div className={cx('explorer__form__group', { 'explorer__form__group--error': !!error })}>
     <label htmlFor={input.name}>{label}</label>
     {description ? <p>{description}</p> : null}
-    <input type="text" className="explorer__form__input" id={input.name} {...input} />
+    <input type="text" className="explorer__form__input" id={input.name} name={input.name} {...input} />
     {(error && <span className="explorer__form__message">{error}</span>)}
   </div>
 );
@@ -23,11 +21,13 @@ TextField.propTypes = {
 
 const SelectField = ({ description, input, label = 'Untitled', name, options, multi = false, meta: { error } }) => (
   <div className="explorer__form__group">
-    <label htmlFor={name}>{label}</label>
+    <label htmlFor={input.name}>{label}</label>
     {description ? <p>{description}</p> : null}
     <div>
       <Select
         {...input}
+        name={input.name}
+        id={input.name}
         options={options}
         simpleValue = {true}
         onBlur={() => input.onBlur(input.value)}
@@ -41,7 +41,6 @@ SelectField.propTypes = {
   description: PropTypes.string,
   input: PropTypes.object.isRequired,
   label: PropTypes.string,
-  name: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
   multi: PropTypes.bool,
 };
@@ -74,7 +73,7 @@ class Form extends React.Component {
       <form className="explorer__form" onSubmit={handleSubmit}>
         <h1 className="Header-1"><b>Search FTA Rates</b></h1>
           <fieldset className="explorer__form__group">
-            <label>1.  Are you Importing or Exporting?</label>
+            <legend>1.  Are you Importing or Exporting?</legend>
               <div className="explorer__form__radio">
                  <Field component={RadioGroup} name="tradeFlow" options={[
                    { title: <span>You are <u>exporting</u> goods from the United States to an FTA partner.</span>, value: 'Exporting'},
