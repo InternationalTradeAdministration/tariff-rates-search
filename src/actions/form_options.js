@@ -32,7 +32,9 @@ export function requestFormOptions(){
 function fetchResults(){
   return (dispatch) => {
     dispatch(requestOptions());
-    return fetch(`${host}?api_key=${apiKey}&size=1`)
+    return fetch(`${host}?size=1`, {
+      headers: { 'Authorization': 'Bearer ' + config.api.tariff_rates.access_token }
+    })
         .then(response => response.json())
         .then(json => dispatch(setFormOptions(json)))
         .catch((error) => {
