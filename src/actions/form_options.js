@@ -15,8 +15,6 @@ export function requestOptions() {
 
 export function setFormOptions(json){
   const countries = extractOptions(json.aggregations.partners);
-  countries.push({label: 'Canada', value: 'Canada'});
-  countries.push({label: 'Mexico', value: 'Mexico'});
   countries.sort(propComparator('value', 'asc'));
   const return_action = {  
     type: SET_FORM_OPTIONS,
