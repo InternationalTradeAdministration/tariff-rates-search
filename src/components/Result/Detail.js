@@ -20,9 +20,11 @@ const Detail = ({ result }) => (
 
       <Row label="Base Rate">{result.base_rate}</Row>
 
-      <Row label="Annual Rates">
-        <ResultTable headers={['Year', 'Tariff Rate']} entries={result.annual_rates} tariff_line={result.tariff_line} reporter_name={result.reporter_name} partner_name={result.partner_name} />
-      </Row>
+      { HIDE_RATES.includes(result.annual_rates) ? (
+        <Row label="Annual Rates">
+          <ResultTable headers={['Year', 'Tariff Rate']} entries={result.annual_rates} tariff_line={result.tariff_line} reporter_name={result.reporter_name} partner_name={result.partner_name} />
+        </Row>
+      ) : null }
 
       <Row label="Rule of Origin">
         {result.rule_text && <span>{result.rule_text}</span>}
@@ -38,3 +40,8 @@ Detail.propTypes = {
 };
 
 export default Detail;
+
+const HIDE_RATES = [
+  "Excluded from U.S.-Japan Trade Agreement Stage One",
+  "Please see U.S. Department of Agriculture's Agricultural Tariff Tracker for more information: https://apps.fas.usda.gov/agtarifftracker/Home/Search",
+]
