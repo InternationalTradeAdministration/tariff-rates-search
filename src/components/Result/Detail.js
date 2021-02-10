@@ -20,9 +20,11 @@ const Detail = ({ result }) => (
 
       <Row label="Base Rate">{result.base_rate}</Row>
 
-      <Row label="Annual Rates">
-        <ResultTable headers={['Year', 'Tariff Rate']} entries={result.annual_rates} tariff_line={result.tariff_line} reporter_name={result.reporter_name} partner_name={result.partner_name} />
-      </Row>
+      { (result.hide_annual_rates === 'True') ? null : (
+        <Row label="Annual Rates">
+          <ResultTable headers={['Year', 'Tariff Rate']} entries={result.annual_rates} tariff_line={result.tariff_line} reporter_name={result.reporter_name} partner_name={result.partner_name} />
+        </Row>
+      ) }
 
       <Row label="Rule of Origin">
         {result.rule_text && <span>{result.rule_text}</span>}
