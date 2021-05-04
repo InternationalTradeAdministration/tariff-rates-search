@@ -5,7 +5,7 @@ const config = assign({
     api: {
       tariff_rates: {
         host: 'https://api.trade.gov/gateway/v1/tariff_rates/search',
-        access_token: 'b0045391-2ef8-3049-a215-f78b7716f045',
+        access_token: 'access_token',
       },
     },
   },
@@ -13,7 +13,7 @@ const config = assign({
     api: {
       tariff_rates: {
         host: 'https://api.trade.gov/gateway/v1/tariff_rates/search',
-        access_token: 'b0045391-2ef8-3049-a215-f78b7716f045',
+        access_token: 'access_token',
       },
     },
   },

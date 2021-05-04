@@ -5,7 +5,7 @@ import { SET_FORM_OPTIONS, REQUEST_FORM_OPTIONS } from '../constants';
 import config from '../config.js';
 import { receiveFailure } from './results.js';
 
-const { host, apiKey } = config.api.tariff_rates;
+const { host, access_token } = config.api.tariff_rates;
 
 export function requestOptions() {
   return {
@@ -14,7 +14,7 @@ export function requestOptions() {
 }
 
 export function setFormOptions(json){
-  const countries = extractOptions(json.aggregations.partners);
+  const countries = extractOptions(json.aggregations.countries);
   countries.sort(propComparator('value', 'asc'));
   const return_action = {  
     type: SET_FORM_OPTIONS,
@@ -31,7 +31,7 @@ function fetchResults(){
   return (dispatch) => {
     dispatch(requestOptions());
     return fetch(`${host}?size=1`, {
-      headers: { 'Authorization': 'Bearer ' + config.api.tariff_rates.access_token }
+      headers: { 'Authorization': 'Bearer ' + access_token }
     })
         .then(response => response.json())
         .then(json => dispatch(setFormOptions(json)))
