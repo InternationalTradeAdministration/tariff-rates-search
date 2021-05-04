@@ -24,13 +24,13 @@ export function receiveFailure(error) {
   };
 }
 
-const { host, apiKey } = config.api.tariff_rates;
+const { host, access_token } = config.api.tariff_rates;
 
 function fetchResults(querystring) {
   return (dispatch) => {
     dispatch(requestResults());
     return fetch(`${host}?${querystring}`, {
-      headers: { 'Authorization': 'Bearer ' + config.api.tariff_rates.access_token }
+      headers: { 'Authorization': 'Bearer ' + access_token }
     })
       .then(response => response.json())
       .then(json => dispatch(receiveResults(json)));
