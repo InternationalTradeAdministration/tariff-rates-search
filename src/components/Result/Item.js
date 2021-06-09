@@ -20,16 +20,17 @@ class Item extends Component {
   }
 
   render() {
-    const { tariff_line, subheading_description, quota_name } = this.props.result;
+    const { tariff_line, subheading_description, quota_name, tariff_line_description } = this.props.result;
     const { expand } = this.state;
-    const itemTitle = tariff_line + " - " + subheading_description;
     const trq = quota_name ? " - " + quota_name : null
 
     return (
       <div className="explorer__result-item">
         <a href="#" className="explorer__result-item__label" onClick={this.onClick}>
-          {itemTitle}{trq}
+          {tariff_line}{trq}
         </a>
+        <p className="outline__right">{subheading_description}</p>
+        <p>{tariff_line_description}</p>
         {expand ? <Detail result={this.props.result} /> : null}
       </div>
     );
