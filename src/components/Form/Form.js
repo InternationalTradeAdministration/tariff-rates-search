@@ -91,7 +91,7 @@ class Form extends React.Component {
             description="If you know your HS code, enter it here (enter 4-10 numeric codes to identify a product).  This field is not required."
           />
           <p>
-          If you do not know your HS code, the <a href="https://uscensus.prod.3ceonline.com/" target="_blank">Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, please see <a href="./FAQs" target="_blank">FAQ page</a> for more information.
+          If you do not know your HS code, the <a href="https://uscensus.prod.3ceonline.com/" target="_blank">Schedule B Search Engine</a> can help you determine your HS code by allowing you to search by keyword or product description.   If you are still having trouble finding your products, please see <a href="https://www.trade.gov/faq/fta-tariff-tool-faq" target="_blank">FAQ page</a> for more information.
           </p>
           <div className="explorer__form__group">
             <button className="explorer__form__submit pure-button pure-button-primary" type="submit" onClick={handleSubmit} disabled={!!error}>

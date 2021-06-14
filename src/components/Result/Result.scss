@@ -2,6 +2,7 @@
 
 .explorer__result-item {
   margin-top: 10px;
+  outline: #112e51 solid 1px;
 
   &__detail {
     margin-top: 1rem;
@@ -9,6 +10,7 @@
 
   a.explorer__result-item__label {
     color: #126aa8;
+    padding: 0 5px 0 10px;
   }
 
   ol {
@@ -55,6 +57,15 @@
       margin: 0;
       padding: 0;
     }
+  }
+
+  p {
+    display: inline-block;
+    padding: 0 10px;
+  }
+
+  p.outline__right {
+    border-right: #112e51 solid 1px;
   }
 
   &-table {

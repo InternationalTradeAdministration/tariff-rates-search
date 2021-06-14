@@ -28,7 +28,6 @@ const ResultTable = ({ headers, entries, reporter_name, partner_name, tariff_lin
   if (((reporter_name === "Korea") || (partner_name === "Korea")) && ConsolidatedLines.includes(tariff_line)) {
     orderedItems = orderedItems.slice((orderedItems.filter(item => item.includes("y2020"))), -22); // because we want to chop the next 22 years
   };
-  // console.log(orderedItems);
 
   const items = compact(map(orderedItems, arr => (
     <Row key={arr[0]} label={arr[0].replace('y', '')}>{truncateDecimalPlace(arr[1])}</Row>
