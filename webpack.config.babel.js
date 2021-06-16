@@ -29,7 +29,6 @@ const commonConfig = {
     new CleanWebpackPlugin(['dist']),
     new CopyWebpackPlugin([
       { from: path.join(__dirname, 'public'), to: 'public' },
-      { from: path.join(__dirname, 'src/html/FAQs.html') },
     ]),
     new HtmlWebpackPlugin({
       template: './index.html',

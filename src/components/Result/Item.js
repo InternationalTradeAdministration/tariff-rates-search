@@ -27,10 +27,8 @@ class Item extends Component {
     return (
       <div className="explorer__result-item">
         <a href="#" className="explorer__result-item__label" onClick={this.onClick}>
-          {tariff_line}{trq}
+          {tariff_line}{trq} - {tariff_line_description}
         </a>
-        <p className="outline__right">{subheading_description}</p>
-        <p>{tariff_line_description}</p>
         {expand ? <Detail result={this.props.result} /> : null}
       </div>
     );
