@@ -3,6 +3,9 @@ import Fragment from 'react-dot-fragment';
 import { compact, get, isEmpty, map } from '../../utils/lodash';
 
 const isValidChildren = (value) => {
+  if (value) {
+    console.log('value' + value.type);
+  }
   if (typeof value === 'number' || typeof value === 'boolean') return true;
 
   if (isEmpty(value)) return false;
@@ -23,14 +26,18 @@ const truncateDecimalPlace = (value) => {
 const ResultTable = ({ headers, entries, reporter_name, partner_name, tariff_line }) => {
   if (isEmpty(entries)) return null;
   const headerCells = headers.map(header => <th key={header}>{header}</th>);
-  let orderedItems = map(entries, (v, k) => [k, v]).sort();
+  let filteredItems = entries
+  let y2020 = null
+  let y2041 = null
 
   if (((reporter_name === "Korea") || (partner_name === "Korea")) && ConsolidatedLines.includes(tariff_line)) {
-    orderedItems = orderedItems.slice((orderedItems.filter(item => item.includes("y2020"))), -22); // because we want to chop the next 22 years
+    y2020 = filteredItems.find(e => e.year === 2020);
+    y2041 = filteredItems.find(e => e.year === 2041);
+    filteredItems = filteredItems.filter((e) => e.year < 2020);
   };
 
-  const items = compact(map(orderedItems, arr => (
-    <Row key={arr[0]} label={arr[0].replace('y', '')}>{truncateDecimalPlace(arr[1])}</Row>
+  const items = compact(map(filteredItems, item => (
+    <Row key={item.year} label={item.year}>{item.value}</Row>
   )));
 
   return (
@@ -42,11 +49,11 @@ const ResultTable = ({ headers, entries, reporter_name, partner_name, tariff_lin
           <Fragment>
               <tr>
                 <td className="explorer__result-field-name">2020 - 2040</td>
-                <td className="explorer__result-field-value">{truncateDecimalPlace(entries["y2020"])}</td>
+                <td className="explorer__result-field-value">{y2020.value}</td>
               </tr>
               <tr>
                 <td className="explorer__result-field-name">2041</td>
-                <td className="explorer__result-field-value">{truncateDecimalPlace(entries["y2041"])}</td>
+                <td className="explorer__result-field-value">{y2041.value}</td>
               </tr>
           </Fragment>
         ) : null }
@@ -65,11 +72,26 @@ const Row = ({ label, children }) => {
     </tr>
   );
 };
-Row.propTypes = { label: PropTypes.string.isRequired, children: PropTypes.any };
+Row.propTypes = { label: PropTypes.oneOfType([PropTypes.string.isRequired, PropTypes.number.isRequired]), children: PropTypes.any };
+
+const Links = ({items}) => {
+  const filteredItems = items.filter(link => link.link_url && link.link_text);
+
+  return (
+      <div>
+        {filteredItems.map((link, index) => (
+          <p key={index}><a href={link.link_url}>{link.link_text}</a></p>
+        ))}
+      </div>
+  );
+};
+
+Links.propTypes = { items: PropTypes.array.isRequired };
 
 export {
   Row,
-  ResultTable
+  ResultTable,
+  Links
 };
 
 const ConsolidatedLines = [

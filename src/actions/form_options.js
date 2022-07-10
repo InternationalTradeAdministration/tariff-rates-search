@@ -5,7 +5,7 @@ import { SET_FORM_OPTIONS, REQUEST_FORM_OPTIONS } from '../constants';
 import config from '../config.js';
 import { receiveFailure } from './results.js';
 
-const { host, access_token } = config.api.tariff_rates;
+const { host, subscription_key } = config.api.tariff_rates;
 
 export function requestOptions() {
   return {
@@ -16,7 +16,7 @@ export function requestOptions() {
 export function setFormOptions(json){
   const countries = extractOptions(json.aggregations.countries);
   countries.sort(propComparator('value', 'asc'));
-  const return_action = {  
+  const return_action = {
     type: SET_FORM_OPTIONS,
     countries: countries,
   };
@@ -30,8 +30,8 @@ export function requestFormOptions(){
 function fetchResults(){
   return (dispatch) => {
     dispatch(requestOptions());
-    return fetch(`${host}?size=1`, {
-      headers: { 'Authorization': 'Bearer ' + access_token }
+    return fetch(`${host}/count`, {
+      headers: { 'subscription-key': subscription_key, 'Cache-Control': 'no-cache' }
     })
         .then(response => response.json())
         .then(json => dispatch(setFormOptions(json)))
@@ -42,8 +42,8 @@ function fetchResults(){
 }
 
 function extractOptions(aggregations){
-  let options = map(aggregations, obj => { 
-    return {label: obj['key'], value: obj['key']};
+  let options = map(aggregations, obj => {
+    return {label: obj['value'], value: obj['value']};
   });
 
   return options;

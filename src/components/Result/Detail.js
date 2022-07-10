@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Row, ResultTable } from './DetailItem';
+import { Row, ResultTable, Links } from './DetailItem';
 
 const Detail = ({ result }) => (
   <table className="explorer__result-item__detail">
@@ -20,7 +20,7 @@ const Detail = ({ result }) => (
         {result.tariff_rate_quota_note && <span dangerouslySetInnerHTML={{ __html: result.tariff_rate_quota_note } } />}
       </Row>
 
-      <Row label="Base Rate">{result.base_rate}</Row>
+      <Row label="Base Rate">{result.base_rate || result.base_rate_alt}</Row>
 
       { (result.hide_annual_rates === 'True') ? null : (
         <Row label="Annual Rates">
@@ -30,9 +30,7 @@ const Detail = ({ result }) => (
 
       <Row label="Rule of Origin">
         {result.rule_text && <span>{result.rule_text}</span>}
-        {result.link_text && result.link_url && <p><a href={result.link_url}>{result.link_text}</a></p>}
-        {result.link_text2 && result.link_url2 && <p><a href={result.link_url2}>{result.link_text2}</a></p>}
-        {result.link_text3 && result.link_url3 && <p><a href={result.link_url3}>{result.link_text3}</a></p>}
+        <Links items={result.links} />
       </Row>
     </tbody>
   </table>

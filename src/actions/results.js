@@ -24,13 +24,13 @@ export function receiveFailure(error) {
   };
 }
 
-const { host, access_token } = config.api.tariff_rates;
+const { host, subscription_key } = config.api.tariff_rates;
 
 function fetchResults(querystring) {
   return (dispatch) => {
     dispatch(requestResults());
-    return fetch(`${host}?${querystring}`, {
-      headers: { 'Authorization': 'Bearer ' + access_token }
+    return fetch(`${host}/search?${querystring}`, {
+      headers: { 'subscription-key': subscription_key, 'Cache-Control': 'no-cache' }
     })
       .then(response => response.json())
       .then(json => dispatch(receiveResults(json)));
@@ -48,29 +48,21 @@ function shouldFetchResults(state, params) {
 }
 
 function processParams(params) {
-  const new_params = { sort: 'tariff_line:asc'};
+  const new_params = {};
   if(params.trade_flow === 'Importing'){
-    new_params.partner_agreement_names = params.countries;
-    new_params.reporter_agreement_names = 'United States'
+    new_params.partner_names = params.countries;
+    new_params.reporter_names = 'United States';
   }
   else{
-    new_params.reporter_agreement_names = params.countries;
-    new_params.partner_agreement_names = 'United States'
+    new_params.reporter_names = params.countries;
+    new_params.partner_names = 'United States';
   }
   if (params.offset)
     new_params.offset = params.offset;
   if (params.hs_code)
-    processHSCode(new_params, params.hs_code);
+    new_params.hs_code_prefix = params.hs_code;
 
   return stringify(new_params);
-}
-
-function processHSCode(params, hs_code){
-  let hs_field = "tariff_line";
-  const length = hs_code.length;
-  if (length < 10)
-    hs_field = "hs_prefix_" + length;
-  params[hs_field] = hs_code;
 }
 
 export function fetchResultsIfNeeded(params) {

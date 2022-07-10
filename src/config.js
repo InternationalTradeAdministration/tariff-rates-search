@@ -4,16 +4,16 @@ const config = assign({
   development: {
     api: {
       tariff_rates: {
-        host: 'https://api.trade.gov/gateway/v1/tariff_rates/search',
-        access_token: 'access_token',
+        host: 'CHANGEME',
+        subscription_key: 'CHANGEME'
       },
     },
   },
   production: {
     api: {
       tariff_rates: {
-        host: 'https://api.trade.gov/gateway/v1/tariff_rates/search',
-        access_token: 'access_token',
+        host: 'CHANGEME',
+        subscription_key: 'CHANGEME'
       },
     },
   },

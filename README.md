@@ -5,6 +5,8 @@ A search client for international tariff rates data.
 
 ### Setup
 
+Update `host` and `subscription_key` in `src/config.js`
+
 ```
 npm install
 npm start
