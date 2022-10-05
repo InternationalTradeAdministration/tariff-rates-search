@@ -3,9 +3,6 @@ import Fragment from 'react-dot-fragment';
 import { compact, get, isEmpty, map } from '../../utils/lodash';
 
 const isValidChildren = (value) => {
-  if (value) {
-    console.log('value' + value.type);
-  }
   if (typeof value === 'number' || typeof value === 'boolean') return true;
 
   if (isEmpty(value)) return false;
@@ -80,7 +77,7 @@ const Links = ({items}) => {
   return (
       <div>
         {filteredItems.map((link, index) => (
-          <p key={index}><a href={link.link_url}>{link.link_text}</a></p>
+          <p key={index}><a href={link.link_url} className='usa-external_link' target='_blank'>{link.link_text}</a></p>
         ))}
       </div>
   );

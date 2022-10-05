@@ -1,6 +1,17 @@
 import React, { PropTypes } from 'react';
 import { Row, ResultTable, Links } from './DetailItem';
 
+const alterLinks = (html) => {
+  let div = document.createElement('div');
+  div.innerHTML = html;
+  let links =  div.querySelectorAll('a');
+  links.forEach((l) => {
+    l.className = 'usa-external_link';
+    l.target = '_blank';
+  });
+  return div.innerHTML;
+};
+
 const Detail = ({ result }) => (
   <table className="explorer__result-item__detail">
     <tbody>
@@ -17,7 +28,7 @@ const Detail = ({ result }) => (
       <Row label="TRQ">{result.quota_name}</Row>
 
       <Row label="Note">
-        {result.tariff_rate_quota_note && <span dangerouslySetInnerHTML={{ __html: result.tariff_rate_quota_note } } />}
+        {result.tariff_rate_quota_note && <span dangerouslySetInnerHTML={{ __html: alterLinks(result.tariff_rate_quota_note) } } />}
       </Row>
 
       <Row label="Base Rate">{result.base_rate || result.base_rate_alt}</Row>
